@@ -1,6 +1,7 @@
-const express = require('express');
-const fetch = require('isomorphic-fetch');
-const cors = require('cors');
+const express = require("express");
+const fetch = require("isomorphic-fetch");
+const cors = require("cors");
+require("dotenv/config");
 
 const port = 4000;
 // App id for openweathermap
@@ -11,23 +12,29 @@ const app = express();
 app.use(cors());
 
 // GET /
-app.get('/', (req, res) => {
-    // Fetch Seattle weather
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=Seattle&appid=${APP_ID}`)
-        .then(response => response.json())
-        .then(data => {
-            // Call res.json with an object to return data
-            return res.json({
-                weather: data,
-                path: req.path,
-                query: req.query
-            });
-        });
+app.get("/restaurants", (req, res) => {
+  const entity_id = req.param("entity_id");
+  const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${entity_id}&entity_type=city&count=5&sort=rating&order=desc`;
+  // Fetch Seattle weather
+  fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "user-key": `${APP_ID}`
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.restaurants[0].restaurant.name);
+      return res.json({
+        restaurants: data.restaurants
+      });
+    });
 });
 
 module.exports = app;
 
 // Start the app on the provided port
 app.listen(port, () => {
-    console.log(`Service listening on port ${port}`);
+  console.log(`Service listening on port ${port}`);
 });
