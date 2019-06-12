@@ -4,10 +4,8 @@ const cors = require("cors");
 require("dotenv/config");
 
 const port = process.env.PORT || 4001;
-// App id for openweathermap
 const APP_ID = process.env.APP_ID;
 
-// Initialize app and enable cross-origin resource sharing
 const app = express();
 app.use(cors());
 
@@ -15,8 +13,6 @@ app.use(cors());
 app.get("/restaurants", (req, res) => {
   const entity_id = req.param("entity_id");
   const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${entity_id}&entity_type=city&count=5&sort=rating&order=desc`;
-  console.log(`url ${url}`);
-  console.log(`APP_ID ${APP_ID}`);
 
   fetch(url, {
     method: "GET",
