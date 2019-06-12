@@ -25,10 +25,10 @@ app.get("/restaurants", (req, res) => {
     }
   })
     .then(response => {
-      console.log(response);
       response.json();
     })
     .then(data => {
+      console.log(data);
       return res.json({
         restaurants: data.restaurants
       });
