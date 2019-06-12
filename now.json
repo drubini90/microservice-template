@@ -1,9 +1,0 @@
-{
-  "version": 2,
-  "name": "microservice-template",
-  "builds": [
-    { "src": "www/**/*", "use": "@now/static" },
-    { "src": "*.js", "use": "@now/node" }
-  ],
-  "routes": [{ "src": "/", "dest": "www/index.html" }]
-}
