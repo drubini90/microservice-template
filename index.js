@@ -25,7 +25,6 @@ app.get("/restaurants", (req, res) => {
   })
     .then(response => response.json())
     .then(data => {
-      console.log(data.restaurants[0].restaurant.name);
       return res.json({
         restaurants: data.restaurants
       });
