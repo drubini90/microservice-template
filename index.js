@@ -3,7 +3,7 @@ const fetch = require("isomorphic-fetch");
 const cors = require("cors");
 require("dotenv/config");
 
-const port = 4000;
+const port = process.env.PORT || 4000;
 // App id for openweathermap
 const APP_ID = process.env.APP_ID;
 
