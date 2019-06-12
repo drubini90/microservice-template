@@ -16,6 +16,7 @@ app.get("/restaurants", (req, res) => {
   const entity_id = req.param("entity_id");
   const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${entity_id}&entity_type=city&count=5&sort=rating&order=desc`;
   console.log(url);
+  console.log(APP_ID);
   fetch(url, {
     method: "GET",
     headers: {
@@ -23,7 +24,10 @@ app.get("/restaurants", (req, res) => {
       "user-key": `${APP_ID}`
     }
   })
-    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+      response.json();
+    })
     .then(data => {
       return res.json({
         restaurants: data.restaurants
