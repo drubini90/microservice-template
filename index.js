@@ -15,7 +15,7 @@ app.use(cors());
 app.get("/restaurants", (req, res) => {
   const entity_id = req.param("entity_id");
   const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${entity_id}&entity_type=city&count=5&sort=rating&order=desc`;
-  // Fetch Seattle weather
+  console.log(url);
   fetch(url, {
     method: "GET",
     headers: {
